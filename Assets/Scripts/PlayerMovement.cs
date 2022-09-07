@@ -36,6 +36,21 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Sliding()); 
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (gameObject.transform.position.z != 3)
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z +3);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (gameObject.transform.position.z != -3)
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 2), gameObject.transform.position.z);
             canSlide = true;
         }
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(2);
         if (activeJump) 
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + -1), gameObject.transform.position.z);
@@ -80,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y - 2), gameObject.transform.position.z);
             canJump = true;
         }
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(2);
         if (activeSlide)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
