@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     bool activeSlide = false;
     bool activeJump = false;
 
+    public GameObject restartButton;
+
     void Start()
     {
         
@@ -22,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         if (Active)
         {
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
@@ -52,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
                 }
             }
+        }
+        else
+        {
+            restartButton.SetActive(true);
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         }
     }
 
