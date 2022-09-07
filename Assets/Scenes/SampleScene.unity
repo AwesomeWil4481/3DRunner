@@ -437,6 +437,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[0]
+      value: 
+      objectReference: {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[1]
+      value: 
+      objectReference: {fileID: 5056179840230833313, guid: ea3f9a5793f0db24bafbd07df5c0c143, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[2]
+      value: 
+      objectReference: {fileID: 6611271346840084078, guid: afeb485544c5446469eb6eaf77edd8d4, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[3]
+      value: 
+      objectReference: {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[4]
+      value: 
+      objectReference: {fileID: 5056179840230833313, guid: ea3f9a5793f0db24bafbd07df5c0c143, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[5]
+      value: 
+      objectReference: {fileID: 6611271346840084078, guid: afeb485544c5446469eb6eaf77edd8d4, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[6]
+      value: 
+      objectReference: {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[7]
+      value: 
+      objectReference: {fileID: 5056179840230833313, guid: ea3f9a5793f0db24bafbd07df5c0c143, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[8]
+      value: 
+      objectReference: {fileID: 6611271346840084078, guid: afeb485544c5446469eb6eaf77edd8d4, type: 3}
+    - target: {fileID: 1012441385, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+      propertyPath: floors.Array.data[9]
+      value: 
+      objectReference: {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
     - target: {fileID: 3032175409917266314, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
       propertyPath: m_Name
       value: Map Prefab 1

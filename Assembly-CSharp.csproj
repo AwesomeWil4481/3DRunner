@@ -56,11 +56,11 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\MapMovement.cs" />
     <Compile Include="Assets\Scripts\MapGeneration.cs" />
+    <Compile Include="Assets\Scripts\MapMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Destroyer.cs" />
     <Compile Include="Assets\EndPoint.cs" />
+    <Compile Include="Assets\Destroyer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

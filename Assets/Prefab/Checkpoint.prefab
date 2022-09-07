@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3975171002705296485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3975171002705296490}
+  - component: {fileID: 3975171002705296488}
+  - component: {fileID: 3975171002705296491}
+  m_Layer: 0
+  m_Name: Checkpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3975171002705296490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975171002705296485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100, y: 3.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3975171002705296488
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975171002705296485}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 5, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3975171002705296491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975171002705296485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab4c46a5a42fd145abc3f2b01b7c335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floors:
+  - {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
+  - {fileID: 5056179840230833313, guid: ea3f9a5793f0db24bafbd07df5c0c143, type: 3}
+  - {fileID: 6611271346840084078, guid: afeb485544c5446469eb6eaf77edd8d4, type: 3}
+  - {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
+  - {fileID: 5056179840230833313, guid: ea3f9a5793f0db24bafbd07df5c0c143, type: 3}
+  - {fileID: 6611271346840084078, guid: afeb485544c5446469eb6eaf77edd8d4, type: 3}
+  - {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
+  - {fileID: 5056179840230833313, guid: ea3f9a5793f0db24bafbd07df5c0c143, type: 3}
+  - {fileID: 6611271346840084078, guid: afeb485544c5446469eb6eaf77edd8d4, type: 3}
+  - {fileID: 3129105400939333336, guid: e574ac875a4e2fe44880f2927d798e53, type: 3}
+  obstacles:
+  - {fileID: 1690342052035612699, guid: 65a8208c192b0d34d96adb293cdf1f20, type: 3}
+  - {fileID: 1690342052035612699, guid: 65a8208c192b0d34d96adb293cdf1f20, type: 3}
+  - {fileID: 1690342052035612699, guid: 65a8208c192b0d34d96adb293cdf1f20, type: 3}
+  - {fileID: 1690342052035612699, guid: 65a8208c192b0d34d96adb293cdf1f20, type: 3}
+  - {fileID: 1690342052035612699, guid: 65a8208c192b0d34d96adb293cdf1f20, type: 3}
+  - {fileID: 2305515811732809102, guid: 39a1f9712682100499bcafaa94e95b76, type: 3}
+  - {fileID: 2305515811732809102, guid: 39a1f9712682100499bcafaa94e95b76, type: 3}
+  - {fileID: 2305515811732809102, guid: 39a1f9712682100499bcafaa94e95b76, type: 3}
+  - {fileID: 2305515811732809102, guid: 39a1f9712682100499bcafaa94e95b76, type: 3}
+  - {fileID: 2305515811732809102, guid: 39a1f9712682100499bcafaa94e95b76, type: 3}
+  map1: {fileID: 3032175409917266314, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+  map2: {fileID: 2560205021507324674, guid: 387b978e1578c09409353ce7b52c5a5d, type: 3}
+  map3: {fileID: 3032175409917266314, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+  map4: {fileID: 2560205021507324674, guid: 387b978e1578c09409353ce7b52c5a5d, type: 3}
+  map5: {fileID: 3032175409917266314, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+  map6: {fileID: 2560205021507324674, guid: 387b978e1578c09409353ce7b52c5a5d, type: 3}
+  map7: {fileID: 3032175409917266314, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+  map8: {fileID: 2560205021507324674, guid: 387b978e1578c09409353ce7b52c5a5d, type: 3}
+  map9: {fileID: 3032175409917266314, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
+  map10: {fileID: 2560205021507324674, guid: 387b978e1578c09409353ce7b52c5a5d, type: 3}
+  Checkpoint: {fileID: 3975171002705296485}
+  chanceOfObstacle: 50

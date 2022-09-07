@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
 
     bool Active = true;
 
+    bool activeSlide = false;
+    bool activeJump = false;
+
     void Start()
     {
         
@@ -44,21 +47,45 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Jumping()
     {
         canJump = false;
-        canSlide = false;
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y +1),gameObject.transform.position.z);
+        activeJump = true;
+        activeSlide = false;
+        if (canSlide)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
+        }
+        else
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 2), gameObject.transform.position.z);
+            canSlide = true;
+        }
         yield return new WaitForSecondsRealtime(1);
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + -1), gameObject.transform.position.z);
+        if (activeJump) 
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + -1), gameObject.transform.position.z);
+            activeJump = false;
+        }
         canJump = true;
-        canSlide = true;
     }
     IEnumerator Sliding()
     {
         canSlide = false;
-        canJump = false;
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + -1), gameObject.transform.position.z);
+        activeSlide = true;
+        activeJump = false;
+        if (canJump)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y - 1), gameObject.transform.position.z);
+        }
+        else
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y - 2), gameObject.transform.position.z);
+            canJump = true;
+        }
         yield return new WaitForSecondsRealtime(1);
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
+        if (activeSlide)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
+            activeSlide = false;
+        }
         canSlide = true;
-        canJump = true;
     }
 }
