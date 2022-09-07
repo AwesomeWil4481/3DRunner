@@ -21,12 +21,14 @@ public class MapGeneration : MonoBehaviour
 
     public GameObject Checkpoint;
 
+    GameObject possibiltyHolster;
+
     public int chanceOfObstacle = 80;
     //public GameObject SpawnLocation;
 
     void Start()
     {
-        //generatePrefab(-1000);
+        possibiltyHolster = GameObject.Find("Possibility Manager");
     }
 
     void Update()
@@ -37,17 +39,28 @@ public class MapGeneration : MonoBehaviour
     GameObject generatePrefab(float currentLocation)
     {
         int sizeOfMap = 0;
+        int lastObstacle;
 
         while (sizeOfMap != 20)
         {
-            int tileNumber = Random.Range(0, 9);
+            int tileNumber = Random.Range(0, 7);
             int obstacleRoll = Random.Range(1, 100);
 
             Instantiate(floors[tileNumber], new Vector3(currentLocation, -1, 0), Quaternion.identity);
 
-            if (sizeOfMap % 4 == 0 && obstacleRoll >= chanceOfObstacle)
+            if (sizeOfMap % 4 == 0 && obstacleRoll <= chanceOfObstacle)
             {
-                tileNumber = Random.Range(0, 9);
+                lastObstacle = possibiltyHolster.GetComponent<PossibiltyHolster>().lastPlacedObstacle;
+                tileNumber = Random.Range(0, 7);
+                while(tileNumber == lastObstacle)
+                {
+                    print("Duplication detected: " + tileNumber);
+                    tileNumber = Random.Range(0, 7);
+                    print("Rerolled: " + tileNumber);
+                }
+                lastObstacle = tileNumber;
+                possibiltyHolster.GetComponent<PossibiltyHolster>().lastPlacedObstacle = lastObstacle;
+
                 var currentTile = obstacles[tileNumber];
                 Instantiate(currentTile, new Vector3(currentLocation, currentTile.transform.position.y, currentTile.transform.position.z), Quaternion.identity);
             }
@@ -59,59 +72,11 @@ public class MapGeneration : MonoBehaviour
         return null;
     }
 
-
-
-    GameObject ChosenGameObject()
-    {
-        int Number = Random.Range(1, 10);
-
-        print(Number);
-
-        if (Number == 1)
-        {
-            return map1;
-        }
-        if (Number == 2)
-        {
-            return map2;
-        }
-        if (Number == 3)
-        {
-            return map3;
-        }
-        if (Number == 4)
-        {
-            return map4;
-        }
-        if (Number == 5)
-        {
-            return map5;
-        }
-        if (Number == 6)
-        {
-            return map6;
-        }
-        if (Number == 7)
-        {
-            return map7;
-        }
-        if (Number == 8)
-        {
-            return map8;
-        }
-        if (Number == 9)
-        {
-            return map9;
-        }
-        if (Number == 10)
-        {
-            return map10;
-        }
-        return null;   
-    }
     public void OnTriggerExit(Collider other)
     {
         generatePrefab(gameObject.transform.position.x + 290);
         Instantiate (Checkpoint, new Vector3(gameObject.transform.position.x + 200,3,0), Quaternion.identity);
+
+        other.GetComponent<PlayerMovement>().Speed += 2;
     }
 }

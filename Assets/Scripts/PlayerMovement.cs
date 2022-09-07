@@ -26,8 +26,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Active)
         {
-            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
 
+
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
 
             if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
             {
@@ -72,6 +73,9 @@ public class PlayerMovement : MonoBehaviour
         canJump = false;
         activeJump = true;
         activeSlide = false;
+
+        bool clean = true;
+
         if (canSlide)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
@@ -81,8 +85,13 @@ public class PlayerMovement : MonoBehaviour
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 2), gameObject.transform.position.z);
             canSlide = true;
         }
-        yield return new WaitForSecondsRealtime(2);
-        if (activeJump)
+        yield return new WaitForSecondsRealtime(1);
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            clean = false;
+        }
+
+        if (activeJump && clean)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + -1), gameObject.transform.position.z);
             activeJump = false;
@@ -94,6 +103,9 @@ public class PlayerMovement : MonoBehaviour
         canSlide = false;
         activeSlide = true;
         activeJump = false;
+
+        bool clean = true;
+
         if (canJump)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y - 1), gameObject.transform.position.z);
@@ -103,8 +115,13 @@ public class PlayerMovement : MonoBehaviour
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y - 2), gameObject.transform.position.z);
             canJump = true;
         }
-        yield return new WaitForSecondsRealtime(2);
-        if (activeSlide)
+        yield return new WaitForSecondsRealtime(1);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            clean = false;
+        }
+
+        if (activeSlide && clean)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
             activeSlide = false;
