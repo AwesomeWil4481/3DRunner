@@ -22,33 +22,35 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
         if (Active)
         {
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
-        }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
-        {
-            StartCoroutine(Jumping());
-        }
 
-        if (Input.GetKeyDown (KeyCode.DownArrow) && canSlide)
-        {
-            StartCoroutine(Sliding()); 
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (gameObject.transform.position.z != 3)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
             {
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z +3);
+                StartCoroutine(Jumping());
             }
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (gameObject.transform.position.z != -3)
+
+            if (Input.GetKeyDown(KeyCode.DownArrow) && canSlide)
             {
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
+                StartCoroutine(Sliding());
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                if (gameObject.transform.position.z != 3)
+                {
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 3);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if (gameObject.transform.position.z != -3)
+                {
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
+                }
             }
         }
     }
@@ -74,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             canSlide = true;
         }
         yield return new WaitForSecondsRealtime(2);
-        if (activeJump) 
+        if (activeJump)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + -1), gameObject.transform.position.z);
             activeJump = false;
