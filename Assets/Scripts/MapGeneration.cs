@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MapGeneration : MonoBehaviour
@@ -40,10 +41,11 @@ public class MapGeneration : MonoBehaviour
     {
         int sizeOfMap = 0;
         int lastObstacle;
+        int sizeOfArray = obstacles.Count() - 1;
 
         while (sizeOfMap != 20)
         {
-            int tileNumber = Random.Range(0, 7);
+            int tileNumber = Random.Range(0, sizeOfArray);
             int obstacleRoll = Random.Range(1, 100);
 
             Instantiate(floors[tileNumber], new Vector3(currentLocation, -1, 0), Quaternion.identity);
@@ -51,11 +53,11 @@ public class MapGeneration : MonoBehaviour
             if (sizeOfMap % 4 == 0 && obstacleRoll <= chanceOfObstacle)
             {
                 lastObstacle = possibiltyHolster.GetComponent<PossibiltyHolster>().lastPlacedObstacle;
-                tileNumber = Random.Range(0, 7);
+                tileNumber = Random.Range(0, sizeOfArray);
                 while(tileNumber == lastObstacle)
                 {
                     print("Duplication detected: " + tileNumber);
-                    tileNumber = Random.Range(0, 7);
+                    tileNumber = Random.Range(0, sizeOfArray);
                     print("Rerolled: " + tileNumber);
                 }
                 lastObstacle = tileNumber;
