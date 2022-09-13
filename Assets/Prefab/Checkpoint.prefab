@@ -91,4 +91,4 @@ MonoBehaviour:
   parentObject: {fileID: 0}
   Checkpoint: {fileID: 3975171002705296485}
   currentParent: -1
-  chanceOfObstacle: 0
+  chanceOfObstacle: 100

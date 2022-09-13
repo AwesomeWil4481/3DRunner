@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
     bool canSlide = true;
 
-    bool Active = true;
+    public bool Active = true;
 
     bool activeSlide = false;
     bool activeJump = false;
