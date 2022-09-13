@@ -6,7 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
-   public void OnButtonClick()
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+    }
+
+    public void OnButtonClick()
     {
         SceneManager.LoadScene("SampleScene");
     }

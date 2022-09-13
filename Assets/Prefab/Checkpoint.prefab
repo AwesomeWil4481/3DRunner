@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3975171002705296485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 100, y: 3.39, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 110, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 5, z: 10}
+  m_Size: {x: 2, y: 5, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3975171002705296491
 MonoBehaviour:
@@ -88,5 +88,7 @@ MonoBehaviour:
   map8: {fileID: 2560205021507324674, guid: 387b978e1578c09409353ce7b52c5a5d, type: 3}
   map9: {fileID: 3032175409917266314, guid: 253f5ee0c7cf78f43b7a888765382801, type: 3}
   map10: {fileID: 2560205021507324674, guid: 387b978e1578c09409353ce7b52c5a5d, type: 3}
+  parentObject: {fileID: 0}
   Checkpoint: {fileID: 3975171002705296485}
-  chanceOfObstacle: 100
+  currentParent: -1
+  chanceOfObstacle: 0
