@@ -10,17 +10,6 @@ public class MapGeneration : MonoBehaviour
 
     public GameObject[] obstacles;
 
-    public GameObject map1;
-    public GameObject map2;
-    public GameObject map3;
-    public GameObject map4;
-    public GameObject map5;
-    public GameObject map6;
-    public GameObject map7;
-    public GameObject map8;
-    public GameObject map9;
-    public GameObject map10;
-
     public GameObject parentObject;
 
     public GameObject Checkpoint;
@@ -53,7 +42,7 @@ public class MapGeneration : MonoBehaviour
             int tileNumber = Random.Range(0, sizeOfArray);
             int obstacleRoll = Random.Range(1, 100);
 
-            var thisTile = Instantiate(floors[tileNumber], new Vector3(currentLocation, -1, 0), Quaternion.identity);
+            var thisTile = Instantiate(floors[Random.Range(0, (floors.Count()) - 1)], new Vector3(currentLocation, -1, 0), Quaternion.identity);
             thisTile.transform.parent = GameObject.Find("Parent Object "+ _currentParent).transform;
 
             if (sizeOfMap % 4 == 0 && obstacleRoll <= chanceOfObstacle)
