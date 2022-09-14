@@ -15,41 +15,110 @@ public class PlayerMovement : MonoBehaviour
     bool activeSlide = false;
     bool activeJump = false;
 
+    bool allowed = true;
+
     public GameObject restartButton;
 
-    void Start()
+    Vector2 fingerDown;
+    Vector2 fingerUp;
+
+    public float SWIPE_THRESHOLD = 20f;
+
+    void checkSwipe()
     {
-        
+            if (verticalMove() > SWIPE_THRESHOLD && verticalMove() > horizontalValMove())
+            {
+                if (fingerDown.y - fingerUp.y > 0 && canJump)//up swipe
+                {
+                    StartCoroutine(Jumping());
+                }
+                else if (fingerDown.y - fingerUp.y < 0 && canSlide)//Down swipe
+                {
+                    StartCoroutine(Sliding());
+                }
+                fingerUp = fingerDown;
+            }
+
+            else if (horizontalValMove() > SWIPE_THRESHOLD && horizontalValMove() > verticalMove())
+            {
+                if (fingerDown.x - fingerUp.x > 0 && allowed)//Right swipe
+                {
+                    allowed = false;
+                    if (gameObject.transform.position.z >= -1)
+                    {
+                        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
+                    }
+                }
+                else if (fingerDown.x - fingerUp.x < 0 && allowed)//Left swipe
+                {
+                    allowed = false;
+                    if (gameObject.transform.position.z <= 1)
+                    {
+                        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 3);
+                    }
+                }
+                fingerUp = fingerDown;
+            }
     }
+
+    float verticalMove()
+    {
+        return Mathf.Abs(fingerDown.y - fingerUp.y);
+    }
+
+    float horizontalValMove()
+    {
+        return Mathf.Abs(fingerDown.x - fingerUp.x);
+    }
+
 
     void Update()
     {
         if (Active)
         {
-
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+                    fingerDown = touch.position;
+                    fingerUp = touch.position;
+                }
+                if (touch.phase == TouchPhase.Moved)
+                {
+                    fingerDown = touch.position;
+                    checkSwipe();
+                }
+                if(touch.phase == TouchPhase.Ended)
+                {
+                    allowed = true;
+                }
+            }
 
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
 
             if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
             {
+
                 StartCoroutine(Jumping());
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow) && canSlide)
             {
+
                 StartCoroutine(Sliding());
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                if (gameObject.transform.position.z != 3)
+
+                if (gameObject.transform.position.z <= 3)
                 {
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 3);
                 }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                if (gameObject.transform.position.z != -3)
+                if (gameObject.transform.position.z >= -3)
                 {
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
                 }
