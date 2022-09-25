@@ -41,9 +41,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3975171002705296485}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 2, y: 5, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3975171002705296491
@@ -74,4 +82,5 @@ MonoBehaviour:
   parentObject: {fileID: 0}
   Checkpoint: {fileID: 3975171002705296485}
   currentParent: -1
-  chanceOfObstacle: 100
+  toIncSpeed: 0
+  chanceOfObstacle: 0

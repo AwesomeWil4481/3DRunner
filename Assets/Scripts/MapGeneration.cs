@@ -14,6 +14,7 @@ public class MapGeneration : MonoBehaviour
     public GameObject Checkpoint;
 
     public int currentParent = -1;
+    public int toIncSpeed = 0;
 
     GameObject possibiltyHolster;
 
@@ -96,6 +97,11 @@ public class MapGeneration : MonoBehaviour
     {
         if (other.name == "Player")
         {
+            if (other.GetComponent<PlayerMovement>().Started == true)
+            {
+                other.GetComponent<PlayerMovement>().EncounteredObs = true;
+            }
+
             generatePrefab(gameObject.transform.position.x + 290, gameObject.GetComponent<MapGeneration>().currentParent);
             var checkpoint = Instantiate(Checkpoint, new Vector3(gameObject.transform.position.x + 200, 3, 0), Quaternion.identity);
 
@@ -108,10 +114,22 @@ public class MapGeneration : MonoBehaviour
                 checkpoint.GetComponent<MapGeneration>().currentParent = gameObject.GetComponent<MapGeneration>().currentParent + 1;
             }
 
+            checkpoint.GetComponent<MapGeneration>().toIncSpeed = GameObject.Find("Game Manager").GetComponent<GameManager>().speedInc;
+            checkpoint.GetComponent<MapGeneration>().chanceOfObstacle = GameObject.Find("Game Manager").GetComponent<GameManager>().obsChance;
+            if (checkpoint.GetComponent<MapGeneration>().toIncSpeed == 2)
+            {
+                Debug.Log("Success");
+            }
+            
+            else if(Checkpoint.GetComponent<MapGeneration>().toIncSpeed == 2)
+            {
+                Debug.Log("Failed");
+            }
+
             checkpoint.transform.parent = GameObject.Find("Parent Object " + gameObject.GetComponent<MapGeneration>().currentParent).transform;
             print("Parent Object " + currentParent);
 
-            other.GetComponent<PlayerMovement>().Speed += 2;
+            other.GetComponent<PlayerMovement>().Speed += toIncSpeed;
         }
     }
 }

@@ -10,7 +10,9 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
     bool canSlide = true;
 
-    public bool Active = true;
+    public bool Active = false;
+    public bool Started = false;
+    public bool EncounteredObs = false;
 
     bool activeSlide = false;
     bool activeJump = false;
@@ -22,11 +24,11 @@ public class PlayerMovement : MonoBehaviour
     Vector2 fingerDown;
     Vector2 fingerUp;
 
-    public float SWIPE_THRESHOLD = 20f;
+    public float swipeThreshold = 20f;
 
     void checkSwipe()
     {
-            if (verticalMove() > SWIPE_THRESHOLD && verticalMove() > horizontalValMove())
+            if (verticalMove() > swipeThreshold && verticalMove() > horizontalValMove())
             {
                 if (fingerDown.y - fingerUp.y > 0 && canJump)//up swipe
                 {
@@ -39,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
                 fingerUp = fingerDown;
             }
 
-            else if (horizontalValMove() > SWIPE_THRESHOLD && horizontalValMove() > verticalMove())
+            else if (horizontalValMove() > swipeThreshold && horizontalValMove() > verticalMove())
             {
                 if (fingerDown.x - fingerUp.x > 0 && allowed)//Right swipe
                 {
@@ -74,8 +76,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!Started)
+        {
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
+        }
         if (Active)
         {
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
+
             foreach (Touch touch in Input.touches)
             {
                 if (touch.phase == TouchPhase.Began)
@@ -88,13 +96,13 @@ public class PlayerMovement : MonoBehaviour
                     fingerDown = touch.position;
                     checkSwipe();
                 }
-                if(touch.phase == TouchPhase.Ended)
+                if (touch.phase == TouchPhase.Ended)
                 {
                     allowed = true;
                 }
             }
 
-            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
+            
 
             if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
             {
@@ -126,8 +134,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            restartButton.SetActive(true);
-            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            if (Started)
+            {
+                restartButton.SetActive(true);
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            }
         }
     }
 

@@ -11,13 +11,20 @@ public class ScoreManager : MonoBehaviour
     public Text hText;
     public GameObject Player;
 
+    public float startPos;
+
     bool saved = false;
     void Update()
     {
-        int currentScore = Convert.ToInt32( Player.transform.position.x);
+
+        if (Player.GetComponent<PlayerMovement>().EncounteredObs != true)
+        {
+            startPos = Player.transform.position.x;
+        }
+        int currentScore = Convert.ToInt32(Player.transform.position.x - startPos);
         int finalScore = 0;
 
-        if (Player.GetComponent<PlayerMovement>().Active)
+        if (Player.GetComponent<PlayerMovement>().EncounteredObs)
         {
             text.text = Convert.ToInt32(currentScore).ToString();
             if (PlayerPrefs.GetFloat("High Score") <= currentScore)
@@ -31,10 +38,13 @@ public class ScoreManager : MonoBehaviour
             {
                 finalScore = currentScore;
                 saveHighScore(Convert.ToInt32(finalScore));
-                saved = true;   
+                saved = true;
             }
+
         }
     }
+
+
 
     public void saveHighScore(int score)
     {
