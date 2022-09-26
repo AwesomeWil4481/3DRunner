@@ -18,4 +18,11 @@ public class Restart : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void OnMenuButton()
+    {
+        GameObject.Find("Possibility Manager").GetComponent<PossibiltyHolster>().first = true;
+        SceneManager.LoadScene("SampleScene");
+
+    }
 }

@@ -97,9 +97,9 @@ public class MapGeneration : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            if (other.GetComponent<PlayerMovement>().Started == true)
+            if (GameObject.Find("Player").GetComponent<PlayerMovement>().gameState == PlayerMovement.PlayerState.Playing)
             {
-                other.GetComponent<PlayerMovement>().EncounteredObs = true;
+                GameObject.Find("Score").GetComponent<ScoreManager>().shouldCount = true;
             }
 
             generatePrefab(gameObject.transform.position.x + 290, gameObject.GetComponent<MapGeneration>().currentParent);

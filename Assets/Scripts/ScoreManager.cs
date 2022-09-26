@@ -13,26 +13,29 @@ public class ScoreManager : MonoBehaviour
 
     public float startPos;
 
+    public bool shouldCount = false;
+
     bool saved = false;
     void Update()
     {
-
-        if (Player.GetComponent<PlayerMovement>().EncounteredObs != true)
+        int currentScore = Convert.ToInt32(Player.transform.position.x - startPos);
+        int finalScore = 0;
+        if (Player.GetComponent<PlayerMovement>().gameState == PlayerMovement.PlayerState.Menu || !shouldCount)
         {
             startPos = Player.transform.position.x;
         }
-        int currentScore = Convert.ToInt32(Player.transform.position.x - startPos);
-        int finalScore = 0;
-
-        if (Player.GetComponent<PlayerMovement>().EncounteredObs)
+        else if (Player.GetComponent<PlayerMovement>().gameState == PlayerMovement.PlayerState.Playing)
         {
-            text.text = Convert.ToInt32(currentScore).ToString();
-            if (PlayerPrefs.GetFloat("High Score") <= currentScore)
+            if (shouldCount)
             {
-                hText.text = currentScore.ToString();
+                text.text = Convert.ToInt32(currentScore).ToString();
+                if (PlayerPrefs.GetFloat("High Score") <= currentScore)
+                {
+                    hText.text = currentScore.ToString();
+                }
             }
         }
-        else
+        else if (Player.GetComponent<PlayerMovement>().gameState == PlayerMovement.PlayerState.Dead) 
         {
             if (!saved)
             {
@@ -40,7 +43,6 @@ public class ScoreManager : MonoBehaviour
                 saveHighScore(Convert.ToInt32(finalScore));
                 saved = true;
             }
-
         }
     }
 

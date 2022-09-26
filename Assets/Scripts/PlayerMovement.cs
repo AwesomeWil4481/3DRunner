@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,19 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
     bool canSlide = true;
 
-    public bool Active = false;
-    public bool Started = false;
-    public bool EncounteredObs = false;
+    public enum PlayerState 
+    {
+        Menu, 
+        Started,
+        Playing, 
+        Dead
+    }
+
+    public PlayerState gameState;
+
+    //public bool Active = false;
+    //public bool Started = false;
+    //public bool EncounteredObs = false;
 
     bool activeSlide = false;
     bool activeJump = false;
@@ -28,39 +39,39 @@ public class PlayerMovement : MonoBehaviour
 
     void checkSwipe()
     {
-            if (verticalMove() > swipeThreshold && verticalMove() > horizontalValMove())
+        if (verticalMove() > swipeThreshold && verticalMove() > horizontalValMove())
+        {
+            if (fingerDown.y - fingerUp.y > 0 && canJump)//up swipe
             {
-                if (fingerDown.y - fingerUp.y > 0 && canJump)//up swipe
-                {
-                    StartCoroutine(Jumping());
-                }
-                else if (fingerDown.y - fingerUp.y < 0 && canSlide)//Down swipe
-                {
-                    StartCoroutine(Sliding());
-                }
-                fingerUp = fingerDown;
+                StartCoroutine(Jumping());
             }
+            else if (fingerDown.y - fingerUp.y < 0 && canSlide)//Down swipe
+            {
+                StartCoroutine(Sliding());
+            }
+            fingerUp = fingerDown;
+        }
 
-            else if (horizontalValMove() > swipeThreshold && horizontalValMove() > verticalMove())
+        else if (horizontalValMove() > swipeThreshold && horizontalValMove() > verticalMove())
+        {
+            if (fingerDown.x - fingerUp.x > 0 && allowed)//Right swipe
             {
-                if (fingerDown.x - fingerUp.x > 0 && allowed)//Right swipe
+                allowed = false;
+                if (gameObject.transform.position.z >= -1)
                 {
-                    allowed = false;
-                    if (gameObject.transform.position.z >= -1)
-                    {
-                        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
-                    }
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
                 }
-                else if (fingerDown.x - fingerUp.x < 0 && allowed)//Left swipe
-                {
-                    allowed = false;
-                    if (gameObject.transform.position.z <= 1)
-                    {
-                        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 3);
-                    }
-                }
-                fingerUp = fingerDown;
             }
+            else if (fingerDown.x - fingerUp.x < 0 && allowed)//Left swipe
+            {
+                allowed = false;
+                if (gameObject.transform.position.z <= 1)
+                {
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 3);
+                }
+            }
+            fingerUp = fingerDown;
+        }
     }
 
     float verticalMove()
@@ -76,75 +87,70 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!Started)
+        if (gameState == PlayerState.Menu || gameState == PlayerState.Playing)
         {
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
-        }
-        if (Active)
-        {
-            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(Speed, 0, 0);
-
-            foreach (Touch touch in Input.touches)
+            if (gameState == PlayerState.Playing)
             {
-                if (touch.phase == TouchPhase.Began)
+                foreach (Touch touch in Input.touches)
                 {
-                    fingerDown = touch.position;
-                    fingerUp = touch.position;
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        fingerDown = touch.position;
+                        fingerUp = touch.position;
+                    }
+                    if (touch.phase == TouchPhase.Moved)
+                    {
+                        fingerDown = touch.position;
+                        checkSwipe();
+                    }
+                    if (touch.phase == TouchPhase.Ended)
+                    {
+                        allowed = true;
+                    }
                 }
-                if (touch.phase == TouchPhase.Moved)
+
+
+
+                if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
                 {
-                    fingerDown = touch.position;
-                    checkSwipe();
+
+                    StartCoroutine(Jumping());
                 }
-                if (touch.phase == TouchPhase.Ended)
+
+                if (Input.GetKeyDown(KeyCode.DownArrow) && canSlide)
                 {
-                    allowed = true;
+
+                    StartCoroutine(Sliding());
                 }
-            }
 
-            
-
-            if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
-            {
-
-                StartCoroutine(Jumping());
-            }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow) && canSlide)
-            {
-
-                StartCoroutine(Sliding());
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-
-                if (gameObject.transform.position.z <= 3)
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 3);
+
+                    if (gameObject.transform.position.z <= 3)
+                    {
+                        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 3);
+                    }
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                if (gameObject.transform.position.z >= -3)
+                if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
+                    if (gameObject.transform.position.z >= -3)
+                    {
+                        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -3);
+                    }
                 }
             }
         }
-        else
+        else if (gameState == PlayerState.Dead)
         {
-            if (Started)
-            {
-                restartButton.SetActive(true);
-                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            }
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            restartButton.SetActive(true);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Active = false;
+        gameState = PlayerState.Dead;
         //gameObject.GetComponent<Rigidbody>().velocity = new Vector3((gameObject.transform.position.x + -1), 0, 0);
     }
 
