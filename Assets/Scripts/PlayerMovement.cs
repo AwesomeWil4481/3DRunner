@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator resetPosition()
     {
-        yield return new WaitForSecondsRealtime(1.3f);
+        yield return new WaitForSecondsRealtime(1);
 
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, (2.4f), gameObject.transform.position.z);
         canJump = true;
