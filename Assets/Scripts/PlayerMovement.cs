@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     public enum PlayerState 
     {
         Menu, 
-        Started,
         Playing, 
         Dead
     }
@@ -154,6 +153,15 @@ public class PlayerMovement : MonoBehaviour
         //gameObject.GetComponent<Rigidbody>().velocity = new Vector3((gameObject.transform.position.x + -1), 0, 0);
     }
 
+    IEnumerator resetPosition()
+    {
+        yield return new WaitForSecondsRealtime(1.3f);
+
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, (2.4f), gameObject.transform.position.z);
+        canJump = true;
+        canSlide = true;
+    }
+
     IEnumerator Jumping()
     {
         canJump = false;
@@ -165,24 +173,18 @@ public class PlayerMovement : MonoBehaviour
         if (canSlide)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
+            StopAllCoroutines();
         }
         else
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 2), gameObject.transform.position.z);
+            StopAllCoroutines();
+
             canSlide = true;
         }
-        yield return new WaitForSecondsRealtime(1);
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            clean = false;
-        }
+        StartCoroutine("resetPosition");
 
-        if (activeJump && clean)
-        {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + -1), gameObject.transform.position.z);
-            activeJump = false;
-        }
-        canJump = true;
+        yield return new WaitForSecondsRealtime(0);
     }
     IEnumerator Sliding()
     {
@@ -195,23 +197,17 @@ public class PlayerMovement : MonoBehaviour
         if (canJump)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y - 1), gameObject.transform.position.z);
+            StopAllCoroutines();
         }
         else
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y - 2), gameObject.transform.position.z);
+            StopAllCoroutines();
+
             canJump = true;
         }
-        yield return new WaitForSecondsRealtime(1);
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            clean = false;
-        }
+        StartCoroutine(resetPosition());
 
-        if (activeSlide && clean)
-        {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
-            activeSlide = false;
-        }
-        canSlide = true;
+        yield return new WaitForSecondsRealtime(0);
     }
 }

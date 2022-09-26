@@ -225,7 +225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -322.00024, y: -100}
+  m_AnchoredPosition: {x: -322.00024, y: -338}
   m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &102799997
@@ -406,9 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 58
-  Active: 0
-  Started: 0
-  EncounteredObs: 0
+  gameState: 0
   restartButton: {fileID: 2018606618}
   swipeThreshold: 20
 --- !u!54 &142012538
@@ -2422,7 +2420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -322, y: -250}
+  m_AnchoredPosition: {x: -322, y: -487.99988}
   m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1472435814
@@ -2449,6 +2447,7 @@ MonoBehaviour:
   hText: {fileID: 102799997}
   Player: {fileID: 142012532}
   startPos: 0
+  shouldCount: 0
 --- !u!114 &1472435816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,7 +2562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -922, y: -100}
+  m_AnchoredPosition: {x: -922, y: -337.99988}
   m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1488346407
