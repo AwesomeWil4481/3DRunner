@@ -907,11 +907,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 03ffd56c-6eaf-4b82-a0ec-97ea90263f9e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: DefaultCompany.3DRunner
+  organizationId: awsomewil4478
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

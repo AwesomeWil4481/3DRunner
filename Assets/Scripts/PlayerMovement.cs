@@ -168,8 +168,6 @@ public class PlayerMovement : MonoBehaviour
         activeJump = true;
         activeSlide = false;
 
-        bool clean = true;
-
         if (canSlide)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, (gameObject.transform.position.y + 1), gameObject.transform.position.z);
@@ -191,8 +189,6 @@ public class PlayerMovement : MonoBehaviour
         canSlide = false;
         activeSlide = true;
         activeJump = false;
-
-        bool clean = true;
 
         if (canJump)
         {
